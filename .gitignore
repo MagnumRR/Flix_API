@@ -1,0 +1,10 @@
+.venv
+.vscode
+db.sqlite3
+actors
+genres
+movies
+reviews
+authentication
+api
+permissions.py
