@@ -2,5 +2,4 @@
 .vscode
 db.sqlite3
 authentication
-api
 permissions.py
