@@ -2,7 +2,6 @@
 .vscode
 db.sqlite3
 actors
-genres
 movies
 reviews
 authentication
