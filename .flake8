@@ -1,0 +1,6 @@
+# Ao realizar a verificação o flake8 não analisa o arquivo ".venv"
+[flake8]
+exclude = .venv
+ 
+# Ignorar o erro "E501" (linha maior que o pdrão de 79)
+ignore = E501, F401, W291, F841

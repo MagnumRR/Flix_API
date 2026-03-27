@@ -9,14 +9,16 @@ from rest_framework.permissions import IsAuthenticated
 # Importando a classe global de permissões em app
 from app.permissions import GlobalDefaultPermission
 
+
 # View para criação e listagem de Review:
 class ReviewCreateListView(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated, GlobalDefaultPermission, )
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
+
 # View para detalhar, atualizar e excluir uma Review:
 class ReviewRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated, GlobalDefaultPermission, )
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer

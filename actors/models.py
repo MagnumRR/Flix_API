@@ -1,7 +1,8 @@
 from django.db import models
 
+
 # Criação das opções de nacionalidade - utilizando o modo "choice"
-#(Campo exibido na lista, nome designado)
+# (Campo exibido na lista, nome designado)
 NATIONALITY_CHOICES = (
     ('BRA', 'Brasil'),
     ('ARG', 'Argentina'),
@@ -51,6 +52,7 @@ NATIONALITY_CHOICES = (
     ('NZL', 'Nova Zelândia'),
 )
 
+
 # Classe Ator
 class Actor (models.Model):
     name = models.CharField(max_length=200)
@@ -61,6 +63,6 @@ class Actor (models.Model):
         blank=True,
         null=True,
     )
-    
+
     def __str__(self):
         return self.name

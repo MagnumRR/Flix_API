@@ -4,6 +4,7 @@ from genres.models import Genre
 # Importando do projeto "actors" o model "Actor"
 from actors.models import Actor
 
+
 # Model Movie
 class Movie (models.Model):
     title = models.CharField(max_length=200)

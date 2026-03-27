@@ -4,6 +4,7 @@ from actors.views import ActorCreateListView, ActorRetrieveUpdateDesctroy
 from movies.views import MovieCreateListView, MovieRetrieveUpdateDestroyView
 from reviews.views import ReviewCreateListView, ReviewRetrieveUpdateDestroyView
 
+
 router = DefaultRouter()
 router.register(r'genres', GenreCreateListView, GenreRetriveUpdateDestroyView)
 router.register(r'actors', ActorCreateListView, ActorRetrieveUpdateDesctroy)

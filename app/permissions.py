@@ -1,9 +1,10 @@
 from rest_framework import permissions
 
+
 class GlobalDefaultPermission(permissions.BasePermission):
-    
+
     def has_permission(self, request, view):
-        
+
         # Atribuição para model:
         model_permission_codenome = self.__get_model_permission_codenome(
             method=request.method,
@@ -13,19 +14,18 @@ class GlobalDefaultPermission(permissions.BasePermission):
             return False
         return request.user.has_perm(model_permission_codenome)
 
-    
     def __get_model_permission_codenome(self, method, view):
         try:
             model_name = view.queryset.model._meta.model_name
             app_label = view.queryset.model._meta.app_label
             action = self.__get_action_sufix(method)
-            return f'{app_label}.{action}_{model_name}' # Estrutura padronizada
+            return f'{app_label}.{action}_{model_name}'  # Estrutura padronizada
         except AttributeError:
             return None
-    
+
     def __get_action_sufix(self, method):
         method_actions = {
-            'GET':'view',
+            'GET': 'view',
             'POST': 'add',
             'PUT': 'change',
             'PATCH': 'change',

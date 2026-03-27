@@ -12,11 +12,12 @@ from app.permissions import GlobalDefaultPermission
 
 class ActorCreateListView (generics.ListCreateAPIView):
     # aplica-se a classe de permissão a view correspondente
-    permission_classes = (IsAuthenticated, GlobalDefaultPermission, )
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
+
 class ActorRetrieveUpdateDesctroy (generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated, GlobalDefaultPermission, )
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer

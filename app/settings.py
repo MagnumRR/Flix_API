@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'genres', # App Gêneros
-    'actors', # App Atores
-    'movies', # App Filmes
-    'reviews', # App Avaliações
-    'rest_framework', # Django Rest Framework
-    'rest_framework_simplejwt', # Pacote de autenticação - JWT
-    'authentication', # Configurações de autenticações - JWT
+    'genres',  # App Gêneros
+    'actors',  # App Atores
+    'movies',  # App Filmes
+    'reviews',  # App Avaliações
+    'rest_framework',  # Django Rest Framework
+    'rest_framework_simplejwt',  # Pacote de autenticação - JWT
+    'authentication',  # Configurações de autenticações - JWT
 ]
 
 MIDDLEWARE = [
@@ -126,15 +126,15 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 REST_FRAMEWORK = {
-    
+
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        
+
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
-    
+
 }
 # Sobrescrevendo o tempo de vida de um token e o tempo de refresh - JWT
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-}    
+}

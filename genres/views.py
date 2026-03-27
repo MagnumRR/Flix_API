@@ -15,17 +15,19 @@ from rest_framework.permissions import IsAuthenticated
 from genres.permissions import GenrePermissionClass
 from app.permissions import GlobalDefaultPermission
 
+
 # Método de criação e listagem com DRF
 class GenreCreateListView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
-    queryset = Genre.objects.all() # Recebe todos os itens da tabela "Genre"
-    serializer_class = GenreSerializer # Designa o serializer
+    queryset = Genre.objects.all()  # Recebe todos os itens da tabela "Genre"
+    serializer_class = GenreSerializer  # Designa o serializer
+
 
 # Método de detalhamento, atualização e exclusão com DRF
 class GenreRetriveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
-    queryset = Genre.objects.all() # Recebe todos os itens da tabela "Genre"
-    serializer_class = GenreSerializer # Designa o serializer
+    queryset = Genre.objects.all()  # Recebe todos os itens da tabela "Genre"
+    serializer_class = GenreSerializer  # Designa o serializer
 
 
 ''' Método sem DRF
@@ -46,8 +48,8 @@ def genre_create_list_view (request):
 ''' Método sem DRF
 @csrf_exempt
 def genre_detail_view(request, pk):
-    genre = get_object_or_404(Genre, pk=pk)    
-    
+    genre = get_object_or_404(Genre, pk=pk)
+
     if request.method == "GET":
         data = ({'id':genre.id, 'name':genre.name})
         return JsonResponse(data)
@@ -59,4 +61,4 @@ def genre_detail_view(request, pk):
     elif request.method == "DELETE":
         genre.delete()
         return JsonResponse({'message': 'Gênero excluído com sucesso!'},status=204)
-'''    
+'''
