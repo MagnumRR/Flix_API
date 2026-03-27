@@ -131,7 +131,6 @@ REST_FRAMEWORK = {
 
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
-
 }
 # Sobrescrevendo o tempo de vida de um token e o tempo de refresh - JWT
 SIMPLE_JWT = {

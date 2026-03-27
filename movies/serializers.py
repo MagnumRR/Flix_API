@@ -4,6 +4,10 @@ from movies.models import Movie
 from rest_framework import serializers
 # Importando a função média (avg) do Django
 from django.db.models import Avg
+# Importando de genres o arquivo serializers
+from genres.serializers import GenreSerializer
+# Importando de actors o arquivo serializers
+from actors.serializer import ActorSerializer
 
 
 # Classe serializer do projeto movies
@@ -11,29 +15,16 @@ class MovieModelSerializer(serializers.ModelSerializer):
 
     genre = serializers.StringRelatedField()
     actors = serializers.StringRelatedField(many=True)
-    rate = serializers.SerializerMethodField(read_only=True)  # Media de avaliações
-
+    
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'genre', 'release_date', 'actors', 'resume', 'rate',]
+        fields = '__all__'  #['id', 'title', 'genre', 'release_date', 'actors', 'resume', 'rate',]
 
     # Criando uma validação de data de lançamento
     def validate_release_date(self, value):
         if value.year < 1990:
             raise serializers.ValidationError('A data de lançamento não pode ser inferior a 1990.')
         return value
-
-    # Para todo atributo do módulo "serializerMethodFiled" deverá ter um método relacionado
-    def get_rate(self, obj):
-        # recebe todas as reviews
-        reviews = obj.reviews.all()
-
-        # Utilizando a função "aggregate" para calcular a média de reviews
-        rate = obj.reviews.aggregate(Avg('stars'))['stars__avg']
-
-        if rate:
-            return rate
-        return "-"
 
     # Criando uma validação de limites de caracteres em comentários
     def validate_resume(self, value):
@@ -49,6 +40,27 @@ class MovieStatsSerializer(serializers.Serializer):
     average_stars = serializers.FloatField()    
 
 
+class MovieListDetailSerializer(serializers.ModelSerializer):
+    rate = serializers.SerializerMethodField(read_only=True)  # Media de avaliações
+    genre = GenreSerializer()
+    actors = ActorSerializer(many=True)
+    
+    class Meta:
+        model = Movie
+        fields = ['id', 'title', 'genre', 'actors', 'release_date', 'rate', 'resume']
+    
+    # Para todo atributo do módulo "serializerMethodFiled" deverá ter um método relacionado
+    def get_rate(self, obj):
+        # recebe todas as reviews
+        
+        # Utilizando a função "aggregate" para calcular a média de reviews
+        rate = obj.reviews.aggregate(Avg('stars'))['stars__avg']
+
+        if rate:
+            return rate
+        return '-'
+    
+    
 '''# Classe serializer - construção manual (apenas para exemplo)
 class MovieSerializer(serializers.Serializer): # do módulo serializers recebe a classe Serializer
     id = serializers.IntegerField() # Retorna o id do filme

@@ -1,7 +1,7 @@
 # Importando do projeto movies o model Movie
 from movies.models import Movie
 # Importando do projeto movies o serializer correspondente
-from movies.serializers import MovieModelSerializer
+from movies.serializers import MovieModelSerializer, MovieListDetailSerializer
 # Importando do rest_framework o módulo generics
 from rest_framework import generics, response, status
 # Importando a classe "Está autenticado" de Rest Framework
@@ -21,14 +21,23 @@ from .serializers import MovieStatsSerializer
 class MovieCreateListView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission, )
     queryset = Movie.objects.all()
-    serializer_class = MovieModelSerializer
+        
+    # Utilizando o método get serializer para capturar o serializer adequado
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return MovieListDetailSerializer
+        return MovieModelSerializer
 
 
 class MovieRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Movie.objects.all()
-    serializer_class = MovieModelSerializer
-
+    
+    # Utilizando o método get serializer para capturar o serializer adequado
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return MovieListDetailSerializer
+        return MovieModelSerializer
 
 class MovieStatsView(views.APIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
