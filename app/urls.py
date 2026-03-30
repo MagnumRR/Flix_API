@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -28,4 +30,8 @@ urlpatterns = [
     path('api/v1/', include('movies.urls')),
     path('api/v1/', include('reviews.urls')),
     path('api/v1/', include('authentication.urls')),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
