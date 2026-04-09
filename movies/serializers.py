@@ -8,17 +8,21 @@ from django.db.models import Avg
 from genres.serializers import GenreSerializer
 # Importando de actors o arquivo serializers
 from actors.serializer import ActorSerializer
+# Importando models de genres
+from genres.models import Genre
+# importando models de actors
+from actors.models import Actor
 
 
 # Classe serializer do projeto movies
 class MovieModelSerializer(serializers.ModelSerializer):
 
-    genre = serializers.StringRelatedField()
-    actors = serializers.StringRelatedField(many=True)
+    genre = serializers.PrimaryKeyRelatedField(queryset=Genre.objects.all())  # Retorna o id do genero do filme
+    actors = serializers.PrimaryKeyRelatedField(queryset=Actor.objects.all(),many=True)
     
     class Meta:
         model = Movie
-        fields = '__all__'  #['id', 'title', 'genre', 'release_date', 'actors', 'resume', 'rate',]
+        fields = ['id', 'title', 'genre', 'release_date', 'actors', 'resume', 'rate']  #['id', 'title', 'genre', 'release_date', 'actors', 'resume', 'rate',]
 
     # Criando uma validação de data de lançamento
     def validate_release_date(self, value):
