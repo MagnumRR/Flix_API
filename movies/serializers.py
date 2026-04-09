@@ -22,7 +22,7 @@ class MovieModelSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'genre', 'release_date', 'actors', 'resume', 'rate']  #['id', 'title', 'genre', 'release_date', 'actors', 'resume', 'rate',]
+        fields = ['id', 'title', 'genre', 'release_date', 'actors', 'resume']  #['id', 'title', 'genre', 'release_date', 'actors', 'resume', 'rate',]
 
     # Criando uma validação de data de lançamento
     def validate_release_date(self, value):
