@@ -51,7 +51,7 @@ class MovieListDetailSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'genre', 'actors', 'release_date', 'resume']
+        fields = '__all__'
     
     # Para todo atributo do módulo "serializerMethodFiled" deverá ter um método relacionado
     def get_rate(self, obj):
