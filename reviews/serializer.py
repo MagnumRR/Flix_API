@@ -10,13 +10,14 @@ from movies.models import Movie
 class ReviewSerializer(serializers.ModelSerializer):
 
     # Exibir o nome do filme, com base no id e permitir edição   
-    movie = serializers.CharField(
-        source='movie.title'
+    movie = serializers.PrimaryKeyRelatedField(
+        queryset=Movie.objects.all()
     )
+    movie_title = serializers.CharField(source='movie.title', read_only=True)  # Exibir o título do filme, sem permitir edição
 
     class Meta:
         model = Review
-        fields = ['id', 'movie', 'stars', 'comment']
+        fields = ['id', 'movie','movie_title', 'stars', 'comment']
 
     def validate_stars(self, value):
 
